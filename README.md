@@ -33,7 +33,7 @@ To open a terminal in VS Code, use the menu **Terminal → New Terminal**.
 ### 2. Download the project
 
 ```bash
-git clone https://github.com/<ORG-NAME>/CodElle_Website.git
+git clone https://github.com/CodElleWorkshops/CodElle_Website.git
 cd CodElle_Website
 ```
 
