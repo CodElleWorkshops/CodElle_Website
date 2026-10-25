@@ -1,0 +1,139 @@
+/* 💖 CodElle theme — change these colours to restyle the whole site! */
+:root {
+  --pink: #ff4fa3;
+  --pink-dark: #d63384;
+  --pink-light: #ffd6ea;
+  --blush: #fff0f7;
+  --lavender: #e9d5ff;
+  --text: #4a2040;
+  --muted: #9b6b8a;
+  --white: #ffffff;
+  --radius: 22px;
+  --shadow: 0 8px 24px rgba(214, 51, 132, 0.15);
+  --font-fancy: "Pacifico", cursive;
+  --font-body: "Quicksand", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% 10%, var(--pink-light) 0, transparent 35%),
+    radial-gradient(circle at 90% 30%, var(--lavender) 0, transparent 30%),
+    var(--blush);
+  min-height: 100vh;
+}
+
+a { color: var(--pink-dark); font-weight: 600; }
+code { background: var(--pink-light); padding: 2px 6px; border-radius: 6px; font-size: 0.9em; }
+
+.app { display: flex; flex-direction: column; min-height: 100vh; }
+.container { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; }
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 3px dotted var(--pink-light);
+  position: sticky; top: 0; z-index: 10;
+}
+.logo { font-family: var(--font-fancy); font-size: 1.8rem; color: var(--pink); text-decoration: none; font-weight: 400; }
+.navbar nav { display: flex; flex-wrap: wrap; gap: 6px; }
+.nav-link { padding: 8px 14px; border-radius: 999px; text-decoration: none; color: var(--text); transition: background 0.2s; }
+.nav-link:hover { background: var(--pink-light); }
+.nav-link.active { background: var(--pink); color: var(--white); }
+
+/* ---------- Footer ---------- */
+.footer { text-align: center; padding: 24px; color: var(--muted); border-top: 3px dotted var(--pink-light); }
+
+/* ---------- Text ---------- */
+.page-title, .hero-title, .section-title { font-family: var(--font-fancy); font-weight: 400; color: var(--pink); }
+.page-title { font-size: 2.6rem; margin: 0 0 8px; }
+.page-subtitle { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin-bottom: 32px; }
+.section-title { font-size: 2rem; text-align: center; margin: 48px 0 24px; }
+.muted { color: var(--muted); }
+.error { color: #c0124f; font-weight: 600; }
+.success { color: #1f8a5b; font-weight: 600; }
+
+/* ---------- Hero ---------- */
+.hero { text-align: center; padding: 48px 16px 24px; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; color: var(--muted); font-weight: 700; }
+.hero-title { font-size: clamp(3.5rem, 12vw, 6rem); margin: 0; text-shadow: 4px 4px 0 var(--pink-light); }
+.hero-tagline { font-size: 1.4rem; font-weight: 700; margin: 8px 0; }
+.hero-intro { max-width: 620px; margin: 0 auto 28px; font-size: 1.05rem; line-height: 1.6; }
+
+/* ---------- Buttons ---------- */
+.button-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 28px; }
+.button {
+  display: inline-block; padding: 12px 24px; border-radius: 999px; border: 2px solid var(--pink);
+  background: var(--pink); color: var(--white); font: inherit; font-weight: 700; text-decoration: none;
+  cursor: pointer; text-transform: capitalize; box-shadow: var(--shadow); transition: transform 0.15s, background 0.15s;
+}
+.button:hover { transform: translateY(-2px); background: var(--pink-dark); border-color: var(--pink-dark); }
+.button:disabled { opacity: 0.6; cursor: wait; }
+.button-outline { background: var(--white); color: var(--pink-dark); }
+.button-outline:hover { background: var(--pink-light); color: var(--pink-dark); }
+
+/* ---------- Cards & grid ---------- */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
+.card {
+  background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);
+  border: 2px solid var(--pink-light); transition: transform 0.2s;
+}
+.card:hover { transform: translateY(-4px) rotate(-0.5deg); }
+.card h3 { margin: 8px 0; color: var(--pink-dark); }
+.card p { line-height: 1.5; }
+.card-emoji { font-size: 2.4rem; }
+
+.member-card { text-align: center; }
+.avatar {
+  width: 90px; height: 90px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center;
+  font-size: 2.6rem; background: linear-gradient(135deg, var(--pink-light), var(--lavender));
+}
+.role { color: var(--pink); font-weight: 700; margin-top: 0; }
+.event-meta { font-size: 0.9rem; color: var(--muted); }
+
+/* ---------- Tags ---------- */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { display: inline-block; padding: 4px 12px; border-radius: 999px; background: var(--pink-light); font-size: 0.8rem; font-weight: 700; text-transform: capitalize; }
+.tag-workshop { background: #ffd6ea; }
+.tag-social { background: #e9d5ff; }
+.tag-talk { background: #ffe8cc; }
+.badge { margin-left: 10px; padding: 2px 10px; border-radius: 999px; background: #d1fae5; color: #1f8a5b; font-size: 0.75rem; vertical-align: middle; }
+
+/* ---------- Contact form ---------- */
+.contact-form {
+  display: flex; flex-direction: column; gap: 16px; max-width: 560px;
+  background: var(--white); padding: 28px; border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.contact-form label { display: flex; flex-direction: column; gap: 6px; font-weight: 700; }
+.contact-form input, .contact-form textarea {
+  font: inherit; padding: 12px 14px; border-radius: 14px; border: 2px solid var(--pink-light); background: var(--blush);
+}
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--pink); }
+.contact-form .button { align-self: flex-start; }
+
+/* ---------- Workshop helpers ---------- */
+.mission-placeholder {
+  text-align: center; padding: 48px 24px; border: 3px dashed var(--pink); border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.6);
+}
+.mission-placeholder h2 { font-family: var(--font-fancy); font-weight: 400; color: var(--pink); }
+.mission-list { display: flex; flex-direction: column; gap: 16px; }
+.mission { display: flex; gap: 18px; align-items: center; background: var(--white); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); }
+.mission h3 { margin: 0 0 4px; }
+.mission p { margin: 0 0 8px; }
+.mission-number {
+  flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--pink); color: var(--white); font-family: var(--font-fancy); font-size: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .navbar { justify-content: center; }
+  .page-title { font-size: 2rem; }
+}
