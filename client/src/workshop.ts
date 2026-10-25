@@ -1,4 +1,4 @@
-// 🎀 WORKSHOP SWITCHBOARD 🎀
+// WORKSHOP SWITCHBOARD
 //
 // Each page has two versions:
 //   - src/pages/XxxPage.tsx      -> YOUR version (starts as a placeholder with TODOs)

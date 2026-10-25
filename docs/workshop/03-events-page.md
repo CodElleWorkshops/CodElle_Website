@@ -1,16 +1,16 @@
-# 📅 Mission 3: The Events Page
+# Mission 3: The Events Page
 
-**File:** `client/src/pages/EventsPage.tsx` · **See it at:** http://localhost:5173/events
-
-**You'll learn:** `useState` · `useEffect` · fetching from a backend · loading & error states · generics like `useState<T>`
+**File:** `client/src/pages/EventsPage.tsx`
+**See it at:** http://localhost:5173/events
+**You'll learn:** `useState`, `useEffect`, fetching from a backend, loading and error states, generics like `useState<T>`
 
 ---
 
-### Step 0: Meet the backend 👀
+### Step 0: Meet the backend
 
 Open http://localhost:4000/api/events in your browser. That's **JSON** sent by our TypeScript server (`server/src/routes/events.ts`).
 
-Now open `shared/types.ts`. The `CodElleEvent` interface is used by **both** the server and React. If they disagree, TypeScript tells us!
+Now open `shared/types.ts`. The `CodElleEvent` interface is used by **both** the server and React. If they ever disagree, TypeScript tells us.
 
 ### Step 1: State for the events
 
@@ -21,7 +21,7 @@ export default function EventsPage() {
   const [events, setEvents] = useState<CodElleEvent[]>([]);
 ```
 
-> 💡 `<CodElleEvent[]>` tells TypeScript: "this state is a list of events". It starts as an empty list `[]`.
+> `<CodElleEvent[]>` tells TypeScript "this state is a list of events". It starts as an empty list `[]`.
 
 ### Step 2: Loading and error state
 
@@ -38,12 +38,12 @@ export default function EventsPage() {
   useEffect(() => {
     getEvents()
       .then((data) => setEvents(data))
-      .catch(() => setError("Could not load events 😢"))
+      .catch(() => setError("Could not load events."))
       .finally(() => setLoading(false));
   }, []);
 ```
 
-`getEvents()` is a helper in `client/src/api/client.ts`. Have a look at how it uses `fetch`!
+`getEvents()` is a helper in `client/src/api/client.ts`. Have a look at how it uses `fetch`.
 
 ### Step 4: Show the events
 
@@ -52,17 +52,20 @@ export default function EventsPage() {
     <>
       <h1 className="page-title">Upcoming events</h1>
 
-      {loading && <p className="muted">Loading events... 💫</p>}
+      {loading && <p className="muted">Loading events...</p>}
       {error && <p className="error">{error}</p>}
 
-      <div className="grid">
+      <div className="event-list">
         {events.map((event) => (
-          <div key={event.id} className="card">
-            <div className="card-emoji">{event.emoji}</div>
-            <h3>{event.title}</h3>
-            <p className="event-meta">📅 {event.date} · 📍 {event.location}</p>
-            <p>{event.description}</p>
-          </div>
+          <article key={event.id} className="event">
+            <div className="event-date">{event.date}</div>
+            <div>
+              <span className="tag">{event.category}</span>
+              <h3>{event.title}</h3>
+              <p className="muted">{event.time} · {event.location}</p>
+              <p>{event.description}</p>
+            </div>
+          </article>
         ))}
       </div>
     </>
@@ -70,20 +73,20 @@ export default function EventsPage() {
 }
 ```
 
-🧪 **Experiment:** stop the server (Ctrl+C) and refresh. Do you see your error message? Start it again with `npm run dev`.
+**Try this:** stop the server (Ctrl+C) and refresh. Do you see your error message? Start it again with `npm run dev`.
 
-### Step 5: ⭐ Filter buttons
+### Step 5: Filter buttons
 
 1. Add state for the chosen category: `const [category, setCategory] = useState("all");`
-2. Change the effect to `getEvents(category)` and the dependency array to `[category]`. Now it re-runs whenever the category changes!
-3. Add buttons:
+2. Change the effect to call `getEvents(category)` and set the dependency array to `[category]`. Now it re-runs whenever the category changes.
+3. Add the buttons:
 
 ```tsx
-<div className="button-row">
+<div className="filters">
   {["all", "workshop", "social", "talk"].map((c) => (
     <button
       key={c}
-      className={c === category ? "button" : "button button-outline"}
+      className={c === category ? "filter active" : "filter"}
       onClick={() => setCategory(c)}
     >
       {c}
@@ -92,20 +95,25 @@ export default function EventsPage() {
 </div>
 ```
 
-### ✅ Done when…
+### Done when
 
-Events load from the server and show as cards, with a loading message while they load.
+Events load from the server and show as a list, with a loading message while they load.
 
-### ⭐ Extra sparkle
+### If you finish early
 
-- Make an `EventCard` component, like you did with `MemberCard`.
-- Format the date nicely: `new Date(event.date).toLocaleDateString("en-GB", { day: "numeric", month: "long" })`
-- Add a coloured tag: `<span className={`tag tag-${event.category}`}>{event.category}</span>`
+- Pull the `<article>` out into its own `EventRow` component, like you did with `MemberCard`.
+- Show the date as a month and day:
+  ```tsx
+  const date = new Date(`${event.date}T12:00`);
+  date.toLocaleDateString("en-CA", { month: "short" }); // "Nov"
+  date.getDate();                                       // 7
+  ```
+  Put them in `<span className="event-month">` and `<span className="event-day">`.
 
 <details>
-<summary>😩 Stuck? Peek at the solution</summary>
+<summary>Stuck? See the solution</summary>
 
-See `client/src/solutions/EventsPage.tsx`.
+`client/src/solutions/EventsPage.tsx`
 </details>
 
-**Next →** [Mission 4: Contact page](04-contact-page.md)
+**Next:** [Mission 4, Contact page](04-contact-page.md)

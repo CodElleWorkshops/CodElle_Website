@@ -1,4 +1,4 @@
-# ⭐ Bonus Mission: Your Own Backend Route
+# Bonus Mission: Your Own Backend Route
 
 **Files:** `server/src/...` · **You'll learn:** Express routes · typing server data · connecting a new API to React
 
@@ -23,9 +23,9 @@ import type { Tip } from "../../../shared/types.js";
 export const tipsRouter = Router();
 
 const tips: Tip[] = [
-  { id: 1, text: "console.log() is your best friend 🔍", author: "CodElle" },
-  { id: 2, text: "Read the error message. It's trying to help!", author: "CodElle" },
-  { id: 3, text: "Take breaks. Bugs are easier to find after a snack 🍓", author: "CodElle" },
+  { id: 1, text: "console.log() is your best friend.", author: "CodElle" },
+  { id: 2, text: "Read the error message. It's trying to help.", author: "CodElle" },
+  { id: 3, text: "Take breaks. Bugs are easier to find after a snack.", author: "CodElle" },
 ];
 
 // GET /api/tips/random
@@ -43,7 +43,7 @@ import { tipsRouter } from "./routes/tips.js";
 app.use("/api/tips", tipsRouter);
 ```
 
-Test it: http://localhost:4000/api/tips/random (refresh a few times!)
+Test it: http://localhost:4000/api/tips/random (refresh a few times)
 
 ### Step 4: Show it in React
 
@@ -56,12 +56,13 @@ export async function getRandomTip(): Promise<Tip> {
 }
 ```
 
-(remember to add `Tip` to the import at the top!)
+(remember to add `Tip` to the import at the top)
 
-Then on the Home page, use `useState<Tip | null>(null)` and `useEffect` to load and show it. You know how from Mission 3! 💪
+Then on the Home page, use `useState<Tip | null>(null)` and `useEffect` to load and show it. You know how from Mission 3.
 
-### More ideas 💡
+### More ideas
 
 - `POST /api/events` to create a new event from a form
 - A "Join CodElle" sign-up page
 - A gallery page with photos from the Instagram
+- A "Past projects" section on the Partners page showing websites members have built

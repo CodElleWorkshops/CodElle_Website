@@ -1,10 +1,10 @@
-// ✅ SOLUTION — Mission 4: Contact page
+// SOLUTION: Mission 4, Contact page
 import { useState } from "react";
 import { sendContactMessage } from "../api/client";
 import { site } from "../data/site";
 import type { ContactMessage } from "../../../shared/types";
 
-const emptyForm: ContactMessage = { name: "", email: "", message: "" };
+const emptyForm: ContactMessage = { name: "", email: "", organization: "", message: "" };
 
 export default function ContactPage() {
   const [form, setForm] = useState<ContactMessage>(emptyForm);
@@ -27,38 +27,52 @@ export default function ContactPage() {
         setStatus({ ok: false, text: result.error });
       }
     } catch {
-      setStatus({ ok: false, text: "Something went wrong 😢 Is the server running?" });
+      setStatus({ ok: false, text: "Something went wrong. Is the server running?" });
     } finally {
       setSending(false);
     }
   }
 
   return (
-    <>
-      <h1 className="page-title">Say hello 💌</h1>
-      <p className="page-subtitle">
-        Questions, ideas, or want to join? Send us a message or DM us on Instagram{" "}
-        <a href={site.instagramUrl} target="_blank" rel="noreferrer">{site.instagramHandle}</a>.
-      </p>
+    <div className="contact">
+      <div>
+        <p className="eyebrow">Get in touch</p>
+        <h1 className="page-title">Contact us</h1>
+        <p className="lead">
+          Want to join a workshop, sponsor an event or have our members build your website? We'd love to hear from you.
+        </p>
+        <dl className="contact-details">
+          <dt>Email</dt>
+          <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+          <dt>Instagram</dt>
+          <dd><a href={site.instagramUrl} target="_blank" rel="noreferrer">{site.instagramHandle}</a></dd>
+          <dt>Where</dt>
+          <dd>{site.school}</dd>
+        </dl>
+      </div>
 
       <form className="contact-form" onSubmit={handleSubmit}>
         <label>
           Name
-          <input name="name" value={form.name} onChange={handleChange} placeholder="Your name" />
+          <input name="name" value={form.name} onChange={handleChange} required />
         </label>
         <label>
           Email
-          <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@example.com" />
+          <input name="email" type="email" value={form.email} onChange={handleChange} required />
+        </label>
+        <label>
+          <span>Company or organisation <span className="muted">(optional)</span></span>
+          <input name="organization" value={form.organization} onChange={handleChange} />
         </label>
         <label>
           Message
-          <textarea name="message" rows={5} value={form.message} onChange={handleChange} placeholder="Write something lovely..." />
+          <textarea name="message" rows={5} value={form.message} onChange={handleChange} required />
         </label>
         <button className="button" type="submit" disabled={sending}>
-          {sending ? "Sending..." : "Send 💌"}
+          {sending ? "Sending..." : "Send message"}
         </button>
         {status && <p className={status.ok ? "success" : "error"}>{status.text}</p>}
       </form>
-    </>
+    </div>
   );
 }

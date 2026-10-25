@@ -1,25 +1,38 @@
-// ✏️ ALL THE CODELLE TEXT LIVES HERE.
-// Update it with the real content from https://www.instagram.com/codelleworkshops/
+// All of the general CodElle text lives here.
+// Keep it in sync with https://www.instagram.com/codelleworkshops/
 
 export const site = {
   name: "CodElle",
-  tagline: "Coding workshops by women, for women 💖",
+  tagline: "Coding Workshops for Girls",
+  school: "Concordia University, Montréal",
   instagramUrl: "https://www.instagram.com/codelleworkshops/",
   instagramHandle: "@codelleworkshops",
-  email: "hello@codelle.example",
+  email: "codelleconcordia@gmail.com",
   intro:
-    "CodElle is a student association that runs friendly, hands-on coding workshops. " +
-    "Whether you've never written a line of code or you're already building apps, there's a place for you here.",
+    "CodElle is a student association at Concordia that runs hands-on coding workshops for girls and women. " +
+    "Whether you've never written a line of code or you're already shipping projects, there's a seat for you.",
 };
 
 export interface Highlight {
-  emoji: string;
+  label: string;
   title: string;
   text: string;
 }
 
 export const highlights: Highlight[] = [
-  { emoji: "💻", title: "Hands-on workshops", text: "Learn by building real projects, step by step." },
-  { emoji: "👯‍♀️", title: "A supportive community", text: "Make friends who love tech as much as you do." },
-  { emoji: "🚀", title: "Grow your career", text: "Talks, mentoring and portfolio projects." },
+  {
+    label: "workshops.tsx",
+    title: "Hands-on workshops",
+    text: "Every session ends with something you built yourself, from a first web page to a full-stack app.",
+  },
+  {
+    label: "community.tsx",
+    title: "A community that shows up",
+    text: "Study sessions, socials and mentors who remember what it was like to be the only girl in the room.",
+  },
+  {
+    label: "careers.tsx",
+    title: "Real-world experience",
+    text: "Talks with industry, portfolio projects and websites built for actual partner organisations.",
+  },
 ];

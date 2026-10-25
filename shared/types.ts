@@ -1,5 +1,5 @@
-// 💖 Types shared by the frontend (client) AND the backend (server).
-// Because both sides use the same types, TypeScript warns us if they ever disagree!
+// Types shared by the frontend (client) AND the backend (server).
+// Because both sides use the same types, TypeScript warns us if they ever disagree.
 
 export type EventCategory = "workshop" | "social" | "talk";
 
@@ -11,12 +11,12 @@ export interface CodElleEvent {
   location: string;
   category: EventCategory;
   description: string;
-  emoji: string;
 }
 
 export interface ContactMessage {
   name: string;
   email: string;
+  organization?: string; // optional: filled in by companies
   message: string;
 }
 

@@ -1,4 +1,4 @@
-// Shown on pages that haven't been built yet. Delete it from your page once you start! 🚧
+// Shown on pages that haven't been built yet. Delete it from your page once you start.
 
 interface MissionPlaceholderProps {
   number: number;
@@ -8,14 +8,13 @@ interface MissionPlaceholderProps {
 
 export default function MissionPlaceholder({ number, page, guide }: MissionPlaceholderProps) {
   return (
-    <div className="mission-placeholder">
-      <div className="card-emoji">🚧</div>
-      <h2>Mission {number}: build the {page} page</h2>
+    <div className="placeholder">
+      <p className="eyebrow">Mission {number}</p>
+      <h2>The {page} page is under construction</h2>
       <p>
-        Open <code>client/src/pages/{page}Page.tsx</code> and follow the guide in{" "}
+        Open <code>client/src/pages/{page}Page.tsx</code> and follow{" "}
         <code>docs/workshop/{guide}</code>.
       </p>
-      <p className="muted">You've got this! 💪✨</p>
     </div>
   );
 }

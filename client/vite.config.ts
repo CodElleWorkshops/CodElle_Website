@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    // Any request starting with /api is sent to our TypeScript backend 💌
+    // Any request starting with /api is sent to our TypeScript backend
     proxy: { "/api": "http://localhost:4000" },
   },
 });

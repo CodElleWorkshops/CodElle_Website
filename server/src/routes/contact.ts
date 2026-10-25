@@ -8,7 +8,7 @@ const messages: ContactMessage[] = [];
 
 // POST /api/contact  { name, email, message }
 contactRouter.post("/", (req, res) => {
-  const { name, email, message } = req.body as Partial<ContactMessage>;
+  const { name, email, organization, message } = req.body as Partial<ContactMessage>;
 
   if (!name || !email || !message) {
     const body: ApiError = { ok: false, error: "Please fill in your name, email and message." };
@@ -21,10 +21,10 @@ contactRouter.post("/", (req, res) => {
     return;
   }
 
-  messages.push({ name, email, message });
-  console.log(`💌 New message from ${name} (${messages.length} total)`);
+  messages.push({ name, email, organization, message });
+  console.log(`New message from ${name}${organization ? ` (${organization})` : ""}`);
 
-  const body: ApiSuccess = { ok: true, message: `Thanks ${name}! We'll get back to you soon 💖` };
+  const body: ApiSuccess = { ok: true, message: `Thanks ${name}! We'll get back to you soon.` };
   res.status(201).json(body);
 });
 

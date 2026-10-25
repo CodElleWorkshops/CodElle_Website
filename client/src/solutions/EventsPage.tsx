@@ -1,4 +1,4 @@
-// ✅ SOLUTION — Mission 3: Events page
+// SOLUTION: Mission 3, Events page
 import { useEffect, useState } from "react";
 import { getEvents } from "../api/client";
 import type { CodElleEvent, EventCategory } from "../../../shared/types";
@@ -6,21 +6,24 @@ import type { CodElleEvent, EventCategory } from "../../../shared/types";
 type Filter = "all" | EventCategory;
 const filters: Filter[] = ["all", "workshop", "social", "talk"];
 
-function formatDate(isoDate: string): string {
-  return new Date(isoDate).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "long" });
-}
-
-function EventCard({ event }: { event: CodElleEvent }) {
+function EventRow({ event }: { event: CodElleEvent }) {
+  // "T12:00" avoids the date shifting by a day in some time zones
+  const date = new Date(`${event.date}T12:00`);
   return (
-    <div className="card event-card">
-      <div className="card-emoji">{event.emoji}</div>
-      <span className={`tag tag-${event.category}`}>{event.category}</span>
-      <h3>{event.title}</h3>
-      <p className="event-meta">
-        📅 {formatDate(event.date)} · 🕕 {event.time} · 📍 {event.location}
-      </p>
-      <p>{event.description}</p>
-    </div>
+    <article className="event">
+      <div className="event-date">
+        <span className="event-month">{date.toLocaleDateString("en-CA", { month: "short" })}</span>
+        <span className="event-day">{date.getDate()}</span>
+      </div>
+      <div>
+        <span className="tag">{event.category}</span>
+        <h3>{event.title}</h3>
+        <p className="muted">
+          {date.toLocaleDateString("en-CA", { weekday: "long" })} · {event.time} · {event.location}
+        </p>
+        <p>{event.description}</p>
+      </div>
+    </article>
   );
 }
 
@@ -35,20 +38,21 @@ export default function EventsPage() {
     setError(null);
     getEvents(category)
       .then((data) => setEvents(data))
-      .catch(() => setError("Could not load events 😢 Is the server running?"))
+      .catch(() => setError("Could not load events. Is the server running?"))
       .finally(() => setLoading(false));
   }, [category]);
 
   return (
     <>
+      <p className="eyebrow">What's on</p>
       <h1 className="page-title">Upcoming events</h1>
-      <p className="page-subtitle">Come code, chat and learn with us ✨</p>
+      <p className="lead">Workshops, socials and talks. Everyone is welcome, no experience required.</p>
 
-      <div className="button-row">
+      <div className="filters">
         {filters.map((f) => (
           <button
             key={f}
-            className={f === category ? "button" : "button button-outline"}
+            className={f === category ? "filter active" : "filter"}
             onClick={() => setCategory(f)}
           >
             {f}
@@ -56,13 +60,13 @@ export default function EventsPage() {
         ))}
       </div>
 
-      {loading && <p className="muted">Loading events... 💫</p>}
+      {loading && <p className="muted">Loading events...</p>}
       {error && <p className="error">{error}</p>}
-      {!loading && !error && events.length === 0 && <p className="muted">No events here yet!</p>}
+      {!loading && !error && events.length === 0 && <p className="muted">No events in this category yet.</p>}
 
-      <div className="grid">
+      <div className="event-list">
         {events.map((event) => (
-          <EventCard key={event.id} event={event} />
+          <EventRow key={event.id} event={event} />
         ))}
       </div>
     </>

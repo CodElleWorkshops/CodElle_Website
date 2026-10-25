@@ -1,10 +1,10 @@
-# 🎀 Instructor Guide
+# Instructor Guide
 
 This is for the person leading the session. Participants start at **[Mission 1](01-about-page.md)**.
 
 ## Before the workshop
 
-- [ ] Update `client/src/data/site.ts`, `about.ts`, `team.ts` and `server/src/data/events.ts` with the real CodElle content from Instagram.
+- [ ] Update `client/src/data/site.ts`, `about.ts`, `team.ts`, `partners.ts` and `server/src/data/events.ts` with the real CodElle content.
 - [ ] Check that every participant can run `node -v` (needs **v18 or newer**) and has VS Code installed.
 - [ ] Share the repo link. Everyone runs the steps in the README's **Setup** section.
 - [ ] Run `npm run dev` yourself and open http://localhost:5173/workshop. You should see the mission map.
@@ -17,11 +17,11 @@ This is for the person leading the session. Participants start at **[Mission 1](
 | 0:15 | **Tour:** project structure + read `HomePage.tsx` together | JSX, components, props, imports |
 | 0:35 | **Mission 1 — About** | Interfaces, props, `.map()` |
 | 1:05 | **Mission 2 — Team** | Lists, keys, optional props, `&&` |
-| 1:35 | ☕ Break |  |
+| 1:35 | Break |  |
 | 1:45 | **Tour:** the backend. Open http://localhost:4000/api/events | REST, JSON, shared types |
 | 1:55 | **Mission 3 — Events** | `useState`, `useEffect`, `fetch` |
 | 2:30 | **Mission 4 — Contact** | Forms, events, POST |
-| 2:55 | Show & tell 💖 + Bonus for fast finishers |  |
+| 2:55 | Show & tell, plus the bonus for fast finishers |  |
 
 ## The tour (how to explain the project)
 
@@ -36,9 +36,15 @@ Draw this on the board:
 
 Then open these files in order:
 1. `client/src/App.tsx`: every page is a **route**.
-2. `client/src/pages/HomePage.tsx`: a finished page. Point out the `Card` component and `highlights.map(...)`.
-3. `client/src/components/Card.tsx`: a component with typed **props**.
+2. `client/src/pages/HomePage.tsx`: a finished page. Point out the `Window` component and `highlights.map(...)`.
+3. `client/src/components/Window.tsx`: a component with typed **props**. It recreates the window from our logo.
 4. `client/src/data/site.ts`: content is just TypeScript data.
+
+## Why this site matters
+
+The finished site is also what the sponsorship team sends to companies (see `/partners`). Tell participants early: the pages they build today become the portfolio piece that shows companies CodElle members can build their websites. It's a real project, not a toy.
+
+The Home and Partners pages are already finished, so the site is presentable even before the missions are done.
 
 ## The solution switchboard
 

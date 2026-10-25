@@ -1,8 +1,10 @@
-# 💌 Mission 4: The Contact Page
+# Mission 4: The Contact Page
 
-**File:** `client/src/pages/ContactPage.tsx` · **See it at:** http://localhost:5173/contact
+**File:** `client/src/pages/ContactPage.tsx`
+**See it at:** http://localhost:5173/contact
+**You'll learn:** controlled forms, typing events, sending data with a POST request, `async`/`await`
 
-**You'll learn:** controlled forms · typing events · sending data with a POST request · `async`/`await`
+This is the page companies use to reach our sponsorship team, so it matters.
 
 ---
 
@@ -15,12 +17,16 @@ const [form, setForm] = useState<ContactMessage>({ name: "", email: "", message:
 const [status, setStatus] = useState("");
 ```
 
-### Step 2: The form
+### Step 2: The page and the form
 
 ```tsx
 return (
   <>
-    <h1 className="page-title">Say hello 💌</h1>
+    <h1 className="page-title">Contact us</h1>
+    <p className="lead">
+      Email us at <a href={`mailto:${site.email}`}>{site.email}</a> or send a message below.
+    </p>
+
     <form className="contact-form" onSubmit={handleSubmit}>
       <label>
         Name
@@ -34,14 +40,14 @@ return (
         Message
         <textarea name="message" rows={5} value={form.message} onChange={handleChange} />
       </label>
-      <button className="button" type="submit">Send 💌</button>
+      <button className="button" type="submit">Send message</button>
       {status && <p>{status}</p>}
     </form>
   </>
 );
 ```
 
-> 💡 This is a **controlled form**: React state is the "source of truth", and each input shows `value={form.something}`.
+> This is a **controlled form**: React state is the source of truth, and each input shows `value={form.something}`.
 
 ### Step 3: Handle typing
 
@@ -53,13 +59,13 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElemen
 }
 ```
 
-> 💡 `...form` copies all the old values, then we overwrite just one. We never change state directly. We always make a new object.
+> `...form` copies all the old values, then we overwrite just one. We never change state directly; we always make a new object.
 
 ### Step 4: Send it to the server
 
 ```tsx
 async function handleSubmit(e: React.FormEvent) {
-  e.preventDefault(); // stop the browser from reloading the page!
+  e.preventDefault(); // stop the browser from reloading the page
   const result = await sendContactMessage(form);
   if (result.ok) {
     setStatus(result.message);
@@ -70,22 +76,26 @@ async function handleSubmit(e: React.FormEvent) {
 }
 ```
 
-> 💡 Notice that TypeScript only lets you use `result.message` inside `if (result.ok)`, and `result.error` in the `else`. This is called **narrowing**, and it's one of TypeScript's superpowers.
+> TypeScript only lets you use `result.message` inside `if (result.ok)`, and `result.error` in the `else`. This is called **narrowing**.
 
-### Step 5: Check it arrived 🎉
+### Step 5: Check it arrived
 
-Send a message, then open http://localhost:4000/api/contact. Your message is there! Also look at the terminal: the server logs `💌 New message from ...`.
+Send a message, then open http://localhost:4000/api/contact. Your message is there. The terminal running the server also logs `New message from ...`.
 
-🧪 **Experiment:** submit the form with an empty name. What does the server answer? Find where that error is created in `server/src/routes/contact.ts`.
+**Try this:** submit the form with an empty name. What does the server answer? Find where that error is created in `server/src/routes/contact.ts`.
 
-### ✅ Done when…
+### Done when
 
 You can send a message, see a thank-you, and the form clears.
 
-<details>
-<summary>😩 Stuck? Peek at the solution</summary>
+### If you finish early
 
-See `client/src/solutions/ContactPage.tsx`.
+`ContactMessage` has an optional `organization` field for companies. Add an input for it, labelled "Company or organisation (optional)".
+
+<details>
+<summary>Stuck? See the solution</summary>
+
+`client/src/solutions/ContactPage.tsx`
 </details>
 
-**Next →** [Bonus: your own backend route](05-bonus-backend.md)
+**Next:** [Bonus, your own backend route](05-bonus-backend.md)
