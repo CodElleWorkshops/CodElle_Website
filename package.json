@@ -2,11 +2,15 @@
   "name": "codelle-website",
   "private": true,
   "version": "1.0.0",
-  "description": "CodElle student association website — built together in our React + TypeScript workshop 💖",
-  "workspaces": ["client", "server"],
+  "description": "CodElle student association website \u2014 built together in our React + TypeScript workshop \ud83d\udc96",
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
     "dev": "concurrently -n server,client -c magenta,cyan \"npm run dev -w server\" \"npm run dev -w client\"",
     "build": "npm run build -w server && npm run build -w client",
+    "start": "npm run start -w server",
     "typecheck": "npm run typecheck -w server && npm run typecheck -w client"
   },
   "devDependencies": {

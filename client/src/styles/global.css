@@ -151,6 +151,10 @@ h1, h2, h3 { line-height: 1.2; }
 .event .tag { text-transform: capitalize; }
 .badge { margin-left: 10px; padding: 1px 8px; border-radius: 3px; background: #dcefe3; color: #2e7d4f; font-size: 0.75rem; font-weight: 500; vertical-align: middle; }
 
+/* ---------- Contributors ---------- */
+.contributors { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.contributors li { padding: 8px 16px; background: var(--white); border: 1.5px solid var(--line); border-radius: 999px; font-weight: 500; }
+
 /* ---------- Partners ---------- */
 .partner-list { display: flex; flex-wrap: wrap; gap: 16px 40px; font-family: var(--font-mono); font-size: 1.2rem; }
 
@@ -184,8 +188,23 @@ h1, h2, h3 { line-height: 1.2; }
 @media (max-width: 760px) {
   .container { padding-top: 36px; }
   .hero, .contact { grid-template-columns: 1fr; }
-  .hero-logo { max-width: 220px; grid-row: 1; }
+  .hero { gap: 24px; }
+  .hero-logo { max-width: 120px; grid-row: 1; justify-self: start; }
+  .hero h1 { font-size: 1.75rem; letter-spacing: -0.04em; }
   .band { padding: 28px 24px; }
+  /* Keep all five menu links on one line, with room to tap them */
+  .navbar nav { flex-wrap: nowrap; gap: 0 16px; }
+  .nav-link { font-size: 0.95rem; padding: 10px 0; }
+  .footer-links a { padding: 10px 0; }
+  .contact-details dd { overflow-wrap: anywhere; }
+  .contact-details a { display: inline-block; padding: 8px 0; }
+}
+
+@media (max-width: 360px) {
+  .navbar nav { gap: 0 11px; }
+  .nav-link { font-size: 0.88rem; }
+  .contact-details { grid-template-columns: 1fr; gap: 0; }
+  .contact-details dd { margin-bottom: 8px; }
   .event { grid-template-columns: 64px 1fr; gap: 16px; }
   .event-date { height: 64px; }
 }

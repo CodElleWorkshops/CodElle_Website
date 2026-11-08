@@ -1,0 +1,22 @@
+# Deployment settings for Render (https://render.com).
+# Render reads this file, builds the site and redeploys it every time
+# main changes, but only after the CI checks have passed.
+services:
+  - type: web
+    name: codelle-website
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    autoDeployTrigger: checksPass
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      # The ID of our Formspree form (the part after formspree.io/f/).
+      # Render asks for it when you first deploy; it's never stored in the code.
+      - key: FORMSPREE_FORM_ID
+        sync: false

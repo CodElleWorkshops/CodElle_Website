@@ -1,0 +1,29 @@
+name: CI
+
+# Runs on every pull request and every push to main.
+# A pull request can only be merged once this passes (see CONTRIBUTING.md).
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    name: Typecheck and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Typecheck client and server
+        run: npm run typecheck
+
+      - name: Build client and server
+        run: npm run build

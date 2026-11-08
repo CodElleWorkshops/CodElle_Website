@@ -93,6 +93,33 @@ Leading the workshop? Read the [Instructor Guide](docs/workshop/00-instructor-gu
 
 ---
 
+## Contributing
+
+Nobody pushes straight to `main`. Make a branch, open a pull request, and get **one approval** plus passing checks before merging. The step-by-step version is in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Continuous integration and deployment
+
+| When | What happens | Where |
+|------|--------------|-------|
+| A pull request is opened or updated | GitHub checks that the code type-checks and builds | `.github/workflows/ci.yml` |
+| A pull request is merged into `main` | Render rebuilds and publishes the live site once the checks pass | `render.yaml` |
+
+In production, the Express server also serves the built React site, so the whole website runs as a single app. To try that locally:
+
+```bash
+npm run build
+NODE_ENV=production npm start   # then open http://localhost:4000
+```
+
+### Contact form on the live site
+
+On the live site, contact messages are emailed to codelleconcordia@gmail.com through [Formspree](https://formspree.io):
+
+1. Sign up at formspree.io with the CodElle Gmail and create a form. Its address looks like `https://formspree.io/f/abcd1234`.
+2. In Render, open the service → **Environment** and set `FORMSPREE_FORM_ID` to the last part (`abcd1234`). Render also asks for it the first time you deploy.
+
+Until it's set, the live form asks visitors to email us instead, so no message is lost.
+
 ## Project structure
 
 ```
@@ -114,6 +141,8 @@ CodElle_Website/
 │       ├── routes/            /api/events and /api/contact
 │       └── data/events.ts     the list of events
 ├── shared/types.ts            types shared by client and server
+├── .github/workflows/ci.yml   automatic checks on every pull request
+├── render.yaml                deployment settings for Render
 └── docs/workshop/             step-by-step mission guides
 ```
 
@@ -124,8 +153,8 @@ CodElle_Website/
 | GET | `/api/health` | Check the server is running |
 | GET | `/api/events` | All events. Add `?category=workshop` to filter |
 | GET | `/api/events/:id` | One event |
-| POST | `/api/contact` | Send a message: `{ name, email, organization?, message }` |
-| GET | `/api/contact` | Messages received so far (kept in memory) |
+| POST | `/api/contact` | Send a message: `{ name, email, organization?, message }`. On the live site it's emailed to us through Formspree. |
+| GET | `/api/contact` | Messages received so far. **On your laptop only**: switched off on the live site so nobody can read them. |
 
 ## Commands
 
@@ -136,6 +165,7 @@ Run these from the main folder:
 | `npm run dev` | Start the website and the server |
 | `npm run typecheck` | Check every file for TypeScript errors |
 | `npm run build` | Build a production version |
+| `npm start` | Run the production build (after `npm run build`) |
 
 ## Updating the content
 
