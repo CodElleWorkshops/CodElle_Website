@@ -2,7 +2,7 @@
 import type { Contributor } from "../contributor";
 
 const me: Contributor = {
-  name: " Samira Mohamad",
+  name: "Samira Mohamad",
   program: "Software Engineering",
 };
 
