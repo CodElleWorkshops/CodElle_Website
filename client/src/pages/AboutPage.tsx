@@ -15,15 +15,37 @@
 
 import MissionPlaceholder from "../components/MissionPlaceholder";
 import { mission, values } from "../data/about";
+import Window from "../components/Window";
 
 export default function AboutPage() {
   return (
     <>
-      <MissionPlaceholder number={1} page="About" guide="01-about-page.md" />
+      <p className="eyebrow">Who we are</p>
+      <h1 className="page-title">About CodElle</h1>
+      <p className="lead">{mission}</p>
+
+      <section className="section">
+        <p className="eyebrow">What we believe in</p>
+        <div className="grid">
+          {values.map((value) => (
+              <ValueCard key={value.title} title={value.title} description={value.description} />
+          ))}
+        </div>
+      </section>
     </>
   );
 }
 
-// STEP 3 goes here
-// interface ValueCardProps { ... }
-// function ValueCard(props: ValueCardProps) { ... }
+interface ValueCardProps {
+  title: string;
+  description: string;
+}
+
+function ValueCard({ title, description }: ValueCardProps) {
+  return (
+    <Window label="CodElle" title={title}>
+      <p>{description}</p>
+    </Window>
+  );
+}
+
