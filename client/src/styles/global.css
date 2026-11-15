@@ -461,15 +461,15 @@ h3 {
 }
 
 .eventdetails {
-  flex: 3;
+  flex: 1;
   min-width: 0;
 }
 
 .eventposter {
-  flex: 1;
-  width: 100%;
+  width: 180px;
   height: 200px;
-  object-fit: contain;
+  flex-shrink: 0;
+  object-fit: fill;
 }
 
 /* ---------- Tags ---------- */

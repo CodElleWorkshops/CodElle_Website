@@ -1,33 +1,9 @@
-// MISSION 3: THE EVENTS PAGE
-// Guide: docs/workshop/03-events-page.md
-//
-// Concepts: useState, useEffect, fetching data from OUR backend, loading & error states
-//
-// The events live on the server (server/src/data/events.ts).
-// Check they're there: open http://localhost:4000/api/events in your browser.
-//
-// STEP 1  Create state to hold the events:
-//           const [events, setEvents] = useState<CodElleEvent[]>([]);
-// STEP 2  Add two more pieces of state:
-//           const [loading, setLoading] = useState(true);
-//           const [error, setError] = useState<string | null>(null);
-// STEP 3  Use useEffect to load the events when the page opens:
-//           useEffect(() => {
-//             getEvents()
-//               .then((data) => setEvents(data))
-//               .catch(() => setError("Could not load events."))
-//               .finally(() => setLoading(false));
-//           }, []);
-// STEP 4  Show "Loading..." while loading, the error if there is one,
-//         otherwise .map() over events and show each one.
-// STEP 5  BONUS: add filter buttons (all / workshop / social / talk).
-//         Store the chosen category in state and pass it to getEvents(category).
-//         Add `category` to the useEffect dependency array: [category]
-
 import { useEffect, useState } from "react";
-import MissionPlaceholder from "../components/MissionPlaceholder";
 import { getEvents } from "../api/client";
-import type { CodElleEvent } from "../../../shared/types";
+import type { CodElleEvent, EventCategory } from "../../../shared/types";
+
+type Filter = "all" | EventCategory;
+const filters: Filter[] = ["all", "workshop", "social", "talk"];
 
 function EventRow({ event }: { event: CodElleEvent }) {
   // "T12:00" avoids the date shifting by a day in some time zones
@@ -48,13 +24,13 @@ function EventRow({ event }: { event: CodElleEvent }) {
           <span className="tag">{event.category}</span>
           <h3>{event.title}</h3>
           <p className="muted">
-            {date.toLocaleDateString("en-CA", { weekday: "long" })} ·{" "}
+            {date.toLocaleDateString("en-CA", { weekday: "long" })} · {" "}
             {event.time} · {event.location}
           </p>
           <p>{event.description}</p>
         </div>
 
-        <img src={event.src} alt="Event Poster" className="eventposter" />
+        <img src={event.src ?? "/defaultposter.png"} alt="Event Poster" className="eventposter" />
       </div>
     </article>
   );
@@ -66,23 +42,40 @@ export default function EventsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Load the events on page open
-  useEffect(() => {
-    getEvents()
+  const [category, setCategory] = useState<Filter>("all");
+
+  // Load the events on page open and each time the selected category changes
+   useEffect(() => {
+    setLoading(true);
+    setError(null);
+    getEvents(category)
       .then((data) => setEvents(data))
-      .catch(() => setError("Could not load events."))
+      .catch(() => setError("Could not load events. Is the server running?"))
       .finally(() => setLoading(false));
-  }, []);
+  }, [category]);
 
   return (
     <>
-      {/* <MissionPlaceholder number={3} page="Events" guide="03-events-page.md" /> */}
-
       <h1 className="page-title">Upcoming events</h1>
+
+      {/* Filter button logic */}
+      <div className="filters">
+        {filters.map((f) => (
+          <button
+            key={f}
+            className={f === category ? "filter active" : "filter"}
+            onClick={() => setCategory(f)}
+          >
+            {f}
+          </button>
+        ))}
+      </div>
 
       {loading && <p className="muted">Loading events...</p>}
       {error && <p className="error">{error}</p>}
+      {!loading && !error && events.length === 0 && <p className="muted">No events in this category yet.</p>}
 
+      {/* Displaying each of the events */}
       <div className="event-list">
         {events.map((event) => (
           <EventRow key={event.id} event={event} />

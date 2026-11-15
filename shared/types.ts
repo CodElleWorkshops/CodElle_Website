@@ -11,7 +11,7 @@ export interface CodElleEvent {
   location: string;
   category: EventCategory;
   description: string;
-  src: string;
+  src?: string;
 }
 
 export interface ContactMessage {
