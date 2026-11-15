@@ -8,8 +8,8 @@
 // (Instructors: flip these on to demo, or if someone gets stuck and wants to catch up.)
 
 export const showSolution = {
-  about: false,
-  team: false,
-  events: false,
-  contact: false,
+  about: true,
+  team: true,
+  events: true,
+  contact: true,
 };

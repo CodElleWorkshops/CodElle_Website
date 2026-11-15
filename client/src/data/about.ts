@@ -14,4 +14,6 @@ export const values: Value[] = [
   { title: "Learn by building", description: "Less lecturing, more making. You leave every workshop with working code." },
   { title: "Community", description: "We learn together, review each other's work and celebrate each win." },
   { title: "Confidence", description: "We help members go from \"I could never\" to \"I built that\"." },
+  { title: "Supportive", description: "Equipping young women with the tools, knowledge, and confidence to pursue successful careers." },
+  { title: "ENACTUS", description: "Proud to be a part of Enactus Concordia"}
 ];

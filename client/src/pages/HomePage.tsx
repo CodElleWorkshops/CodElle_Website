@@ -4,6 +4,7 @@
 import { Link } from "react-router-dom";
 import Window from "../components/Window";
 import { highlights, site } from "../data/site";
+import { contributors } from "../data/contributor";
 
 export default function HomePage() {
   return (
@@ -34,6 +35,23 @@ export default function HomePage() {
             </Window>
           ))}
         </div>
+      </section>
+
+      <section className="section">
+        <h2 className="section-title">Built by our members</h2>
+        <p className="lead">This website was designed and built by CodElle members during our workshops.</p>
+        <ul className="contributors">
+          {contributors.map((person) => (
+            <li key={person.name}>
+              {person.linkedin ? (
+                <a href={person.linkedin} target="_blank" rel="noreferrer">{person.name}</a>
+              ) : (
+                person.name
+              )}
+              <span className="muted"> · {person.program}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="band">
