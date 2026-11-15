@@ -30,7 +30,7 @@ function EventRow({ event }: { event: CodElleEvent }) {
           <p>{event.description}</p>
         </div>
 
-        <img src={event.src ?? "/defaultposter.png"} alt="Event Poster" className="eventposter" />
+        <img src={event.src ?? "/defaultposter.png"} alt={`${event.title} poster`} className="eventposter" />
       </div>
     </article>
   );
